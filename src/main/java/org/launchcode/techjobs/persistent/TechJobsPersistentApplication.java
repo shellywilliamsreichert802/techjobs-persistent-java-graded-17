@@ -2,7 +2,7 @@ package org.launchcode.techjobs.persistent;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+//* written by LaunchCode
 @SpringBootApplication
 public class TechJobsPersistentApplication {
 

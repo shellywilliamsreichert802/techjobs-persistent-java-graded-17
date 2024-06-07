@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+//Created by Shelly//
+
 @Controller
 @RequestMapping("skills")
 public class SkillController {
@@ -33,15 +35,15 @@ public class SkillController {
     }
 
     @PostMapping("add")
-    public String processAddSkillFrom(@ModelAttribute @Valid Skill skill, Errors errors, Model model) {
+    public String processAddSkillForm(@ModelAttribute @Valid Skill newSkill, Errors errors, Model model) {
         // Validate the submitted skill
         if (errors.hasErrors()) {
             return "skills/add"; // Return to the add skill form with validation errors
         }
 
         // Save the valid skill to the repository
-        skillRepository.save(skill);
-        return "redirect:skills/";// Redirect to the skills listing page
+        skillRepository.save(newSkill);
+        return "redirect:";
     }
 
     @GetMapping("view/{skillId}")

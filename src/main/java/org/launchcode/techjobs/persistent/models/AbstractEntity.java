@@ -14,14 +14,15 @@ import java.util.Objects;
 @MappedSuperclass
 public abstract class AbstractEntity {
 
+    //written by Shelly
     @Id
 //    @GeneratedValue
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id; //*
 
     @NotBlank(message = "Name is required")
     @Size(min=1, max=225, message = "Name must be between 1 and 255 characters")
-    private String name;
+    private String name; //*
 
     public int getId() {
         return id;
@@ -57,4 +58,4 @@ public abstract class AbstractEntity {
         return Objects.hash(id);
     }
 
-}
+} //*

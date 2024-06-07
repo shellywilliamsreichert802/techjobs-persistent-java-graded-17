@@ -15,6 +15,7 @@ import java.util.Optional;
 @RequestMapping("employers")
 public class EmployerController {
 
+//
     @Autowired
     private EmployerRepository employerRepository;
 
@@ -23,6 +24,7 @@ public class EmployerController {
         model.addAttribute("employers", employerRepository.findAll());
         return "employers/index";
     }
+//
 
     @GetMapping("add")
     public String displayAddEmployerForm(Model model) {
@@ -38,18 +40,29 @@ public class EmployerController {
             return "employers/add";
         }
 
+        //
         employerRepository.save(newEmployer);
+        //
+
         return "redirect:";
     }
 
     @GetMapping("view/{employerId}")
     public String displayViewEmployer(Model model, @PathVariable int employerId) {
 
+        //
         Optional<Employer> optEmployer = employerRepository.findById(employerId);
+        //
+
+//*        Optional optEmployer = null;
         if (optEmployer.isPresent()) {
-//            Employer employer = (Employer) optEmployer.get();
-//            model.addAttribute("employer", employer);
+//*            Employer employer = (Employer) optEmployer.get();
+//*            model.addAttribute("employer", employer);
+
+            //
             model.addAttribute("employer", optEmployer.get());
+            //
+
             return "employers/view";
         } else {
             return "redirect:../";
