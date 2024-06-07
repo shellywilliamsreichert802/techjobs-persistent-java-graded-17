@@ -1,7 +1,12 @@
 package org.launchcode.techjobs.persistent.controllers;
 
 import jakarta.validation.Valid;
+import org.launchcode.techjobs.persistent.models.Employer;
 import org.launchcode.techjobs.persistent.models.Job;
+import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
+import org.launchcode.techjobs.persistent.models.data.JobRepository;
+import org.launchcode.techjobs.persistent.models.data.SkillRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -25,10 +30,20 @@ public class HomeController {
         return "index";
     }
 
+    @Autowired
+    private EmployerRepository employerRepository;
+
+    @Autowired
+    private JobRepository jobRepository;
+
+    @Autowired
+    private SkillRepository skillRepository;
+
     @GetMapping("add")
     public String displayAddJobForm(Model model) {
 	model.addAttribute("title", "Add Job");
         model.addAttribute(new Job());
+        model.addAttribute("employers", employerRepository.findAll());
         return "add";
     }
 
@@ -41,11 +56,31 @@ public class HomeController {
             return "add";
         }
 
+        Optional<Employer> result = employerRepository.findById(employerId);
+        if (result.isEmpty()) {
+            model.addAttribute("title", "Invalid Employer ID: " + employerId);
+            return "add";
+        }
+
+        Employer employer = result.get();
+        newJob.setEmployer(employer);
+        jobRepository.save(newJob);
+
         return "redirect:";
     }
 
     @GetMapping("view/{jobId}")
     public String displayViewJob(Model model, @PathVariable int jobId) {
+
+        Optional<Job> result = jobRepository.findById(jobId);
+
+        if (result.isEmpty()) {
+            model.addAttribute("title", "Invalid Job ID: " + jobId);
+            return "index";
+        }
+
+        Job job = result.get();
+        model.addAttribute("job", job);
 
             return "view";
     }
