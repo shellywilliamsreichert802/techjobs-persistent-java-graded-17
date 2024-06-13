@@ -14,6 +14,7 @@ public class Job extends AbstractEntity {
             joinColumns = @JoinColumn(name = "job_id"),
             inverseJoinColumns = @JoinColumn(name = "skill_id"))
     private List<Skill> skills;
+//    private List<Skill> skills = new ArrayList<>();
 
     @ManyToOne
     private Employer employer;
@@ -51,4 +52,15 @@ public class Job extends AbstractEntity {
     public void setSkills(List<Skill> skills) {
         this.skills = skills;
     }
+
+    public void addSkill(Skill skill) {
+        this.skills.add(skill);
+        skill.getJobs().add(this);
+    }
+
+    public void removeSkill(Skill skill) {
+        this.skills.remove(skill);
+        skill.getJobs().remove(this);
+    }
 }
+
