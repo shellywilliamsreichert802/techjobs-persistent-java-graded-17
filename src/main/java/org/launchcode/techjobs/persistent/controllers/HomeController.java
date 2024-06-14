@@ -58,6 +58,9 @@ public class HomeController {
             return "add";
         }
 
+        List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
+        newJob.setSkills(skillObjs);
+
         Optional<Employer> result = employerRepository.findById(employerId);
         if (result.isEmpty()) {
             model.addAttribute("title", "Invalid Employer ID: " + employerId);
@@ -66,9 +69,6 @@ public class HomeController {
 
         Employer employer = result.get();
         newJob.setEmployer(employer);
-
-        List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
-        newJob.setSkills(skillObjs);
 
         jobRepository.save(newJob);
 

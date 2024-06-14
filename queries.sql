@@ -18,12 +18,7 @@ DROP TABLE job;
 
 --Part 4
 
-SELECT DISTINCT s.name
-FROM skill s
-JOIN job_skill js ON s.id = js.skill_id
-ORDER BY s.name ASC;
---
---SELECT * FROM skill
---[LEFT|INNER] JOIN job_skill ON (skill.id = job_skill.skill_id OR job_skill.skill_id = skill.id)
---[WHERE job_skill.jobs_id IS NOT NULL]
---ORDER BY name ASC;
+SELECT * FROM skill
+INNER JOIN job_skills ON job_skills.skills_id = skill.id
+WHERE job_skills.jobs_id IS NOT NULL
+ORDER BY name ASC;
