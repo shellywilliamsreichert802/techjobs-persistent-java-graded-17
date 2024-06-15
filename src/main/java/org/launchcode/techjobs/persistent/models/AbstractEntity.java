@@ -12,11 +12,11 @@ import jakarta.validation.constraints.Size;
 
 import java.util.Objects;
 
-@MappedSuperclass
+@MappedSuperclass //mapped to super class and defines properties and behaviors inherited by entity classes
 public abstract class AbstractEntity {
 
     //written by Shelly
-    @Id
+    @Id //unique identifier
     @GeneratedValue
     private int id; //*
 
@@ -54,4 +54,4 @@ public abstract class AbstractEntity {
         return Objects.hash(id);
     }
 
-} //*
+} // overide methods to customize how instances of AbstractEntity are represented as strings, compared for equality, and hashed

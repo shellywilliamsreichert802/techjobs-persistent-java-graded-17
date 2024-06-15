@@ -14,14 +14,14 @@ import static org.launchcode.techjobs.persistent.controllers.ListController.colu
  * Created by LaunchCode
  */
 @Controller
-@RequestMapping("search")
+@RequestMapping("search") //handles requests to /search
 public class SearchController {
 
     @Autowired
     private JobRepository jobRepository;
 
-    @RequestMapping("")
-    public String search(Model model) {
+    @RequestMapping("") //handles rests to /search
+    public String search(Model model) { //adds column choices all, employer, skill to model
         model.addAttribute("columns", columnChoices);
         return "search";
     }
@@ -29,6 +29,7 @@ public class SearchController {
     // TODO #3 - Create a handler to process a search request and render the updated search view.
     @PostMapping("results")
     public String displaySearchResults(Model model, @RequestParam String searchType, @RequestParam String searchTerm){
+        //method handles for submissions when searching for jobs
         Iterable<Job> jobs;
         if (searchTerm.toLowerCase().equals("all") || searchTerm.equals("")){
             jobs = jobRepository.findAll();
@@ -38,7 +39,7 @@ public class SearchController {
         model.addAttribute("columns", columnChoices);
         model.addAttribute("title", "Jobs with " + columnChoices.get(searchType) + ": " + searchTerm);
         model.addAttribute("jobs", jobs);
-
+//retrieves jobs based on specified column and value - tile and job are added to the model
         return "search";
     }
 }

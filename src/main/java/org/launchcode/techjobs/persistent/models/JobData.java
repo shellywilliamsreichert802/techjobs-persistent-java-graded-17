@@ -22,7 +22,7 @@ public class JobData {
      * @return List of all jobs matching the criteria.
      */
     public static ArrayList<Job> findByColumnAndValue(String column, String value, Iterable<Job> allJobs) {
-
+//searches jobs based on columns specified and a search value
         ArrayList<Job> results = new ArrayList<>();
 
         if (value.toLowerCase().equals("all")){
@@ -31,11 +31,11 @@ public class JobData {
 
         if (column.equals("all")){
             results = findByValue(value, allJobs);
-            return results;
+            return results; //returns all jobs
         }
         for (Job job : allJobs) {
 
-            String aValue = getFieldValue(job, column);
+            String aValue = getFieldValue(job, column); //searches for jobs where column contains given value
 
             if (aValue != null && aValue.toLowerCase().contains(value.toLowerCase())) {
                 results.add(job);
@@ -46,7 +46,7 @@ public class JobData {
     }
 
     public static String getFieldValue(Job job, String fieldName){
-        String theValue;
+        String theValue; //retrieves value of specific field used internally by findByColumnAndValue
         if (fieldName.equals("name")){
             theValue = job.getName();
         } else if (fieldName.equals("employer")){
@@ -66,7 +66,7 @@ public class JobData {
      * @return      List of all jobs with at least one field containing the value.
      */
     public static ArrayList<Job> findByValue(String value, Iterable<Job> allJobs) {
-
+//searches all job fields for given search term
 
         ArrayList<Job> results = new ArrayList<>();
 

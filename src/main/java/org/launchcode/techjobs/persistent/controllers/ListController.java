@@ -18,7 +18,7 @@ import java.util.HashMap;
  * Created by LaunchCode
  */
 @Controller
-@RequestMapping(value = "list")
+@RequestMapping(value = "list") //handles requests to /list/jobs
 public class ListController {
 
     @Autowired
@@ -33,23 +33,23 @@ public class ListController {
     static HashMap<String, String> columnChoices = new HashMap<>();
 
     public ListController () {
-
+//map to column names to user friendly labels
         columnChoices.put("all", "All");
         columnChoices.put("employer", "Employer");
         columnChoices.put("skill", "Skill");
 
     }
 
-    @RequestMapping("")
+    @RequestMapping("") //handles requests to /list
     public String list(Model model) {
         model.addAttribute("employers", employerRepository.findAll());
         model.addAttribute("skills", skillRepository.findAll());
-
+//retrives employers and kills from repositories and adds them to the model
         return "list";
     }
 
     @RequestMapping(value = "jobs")
-    public String listJobsByColumnAndValue(Model model, @RequestParam String column, @RequestParam String value) {
+    public String listJobsByColumnAndValue(Model model, @RequestParam String column, @RequestParam String value) { //handles requests to /list/jobs
         Iterable<Job> jobs;
         if (column.toLowerCase().equals("all")){
             jobs = jobRepository.findAll();
@@ -59,7 +59,7 @@ public class ListController {
             model.addAttribute("title", "Jobs with " + columnChoices.get(column) + ": " + value);
         }
         model.addAttribute("jobs", jobs);
-
+//retrieves jons based on column and value (employer or skill). title and job list added to model
         return "list-jobs";
     }
 }

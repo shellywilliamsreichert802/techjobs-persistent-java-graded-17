@@ -24,10 +24,10 @@ public class Employer extends AbstractEntity {
         this.location = location;
     }
 
-    @OneToMany
-    @JoinColumn(name = "employer_id")
+    @OneToMany //annotation establishes a one-to-many relationship between Employer and Job.
+    @JoinColumn(name = "employer_id") //specifies the foreign key column in the Job table that links to the Employer table.
     private final List<Job> jobs = new ArrayList<>();
-
+//jobs field represents the list of jobs associated with this employer.
 
 
     // Getters and setters
