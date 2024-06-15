@@ -12,8 +12,6 @@
     <h2>Skills</h2>
     <ul>
         <li th:each="skill : ${skills}">
-<!--            maybe skill.description-->
-<!--            <a th:href="@{'/skills/view/' + ${skill.id}}" th:text="${skill.description}"></a>-->
             <a th:href="@{'/skills/view/' + ${skill.id}}" th:text="${skill.name}"></a>
         </li>
     </ul>
@@ -24,35 +22,3 @@
 </body>
 </html>
 <!--lists all the skills. Uses the ${skills} object, which should be a list of Skill objects passed from the controller. For each Skill in skills, it creates a list item with a link to the skill’s detail page. The link text is the skill’s description.-->
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org/">-->
-<!--<head th:replace="~{fragments :: head}">-->
-<!--</head>-->
-<!--<body>-->
-
-<!--<div th:replace="~{fragments :: page-header}"></div>-->
-
-<!--<div class="container body-content">-->
-<!--    <h2>Skills</h2>-->
-<!--    <table class="table">-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th>ID</th>-->
-<!--            <th>Name</th>-->
-<!--            <th>Description</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr th:each="skill : ${skills}">-->
-<!--            <td th:text="${skill.id}"></td>-->
-<!--            <td><a th:href="@{'/skills/view/' + ${skill.id}}" th:text="${skill.name}"></a></td>-->
-<!--            <td th:text="${skill.description}"></td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
-<!--    <a th:href="@{'/skills/add'}">Add Skills</a>-->
-
-<!--</div>-->
-
-<!--</body>-->
-<!--</html>-->

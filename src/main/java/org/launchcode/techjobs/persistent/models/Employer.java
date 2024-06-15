@@ -1,3 +1,4 @@
+
 package org.launchcode.techjobs.persistent.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -16,14 +17,21 @@ public class Employer extends AbstractEntity {
     @Size(min = 1, max = 255, message = "Location must be between 1 and 255 characters")
     private String location;
 
-    @OneToMany
-    @JoinColumn(name = "employer_id")
-    private List<Job> jobs = new ArrayList<>();
-
     public Employer() {
     }
 
+    public Employer(String location) {
+        this.location = location;
+    }
+
+    @OneToMany
+    @JoinColumn(name = "employer_id")
+    private final List<Job> jobs = new ArrayList<>();
+
+
+
     // Getters and setters
+
     public String getLocation() {
         return location;
     }
@@ -31,6 +39,8 @@ public class Employer extends AbstractEntity {
     public void setLocation(String location) {
         this.location = location;
     }
-    //
 
+    public List<Job> getJobs() {
+        return jobs;
+    }
 }

@@ -1,3 +1,4 @@
+
 package org.launchcode.techjobs.persistent.models;
 
 import jakarta.persistence.Entity;
@@ -13,24 +14,18 @@ public class Skill extends AbstractEntity {
 
     //written by Shelly
     @NotBlank(message = "Description is required")
-    @Size(min = 1, max = 255, message = "Description must be between 1 and 255 characters")
+    @Size(max = 75, message = "Field must be 75 characters or less.")
     private String description;
-
     @ManyToMany(mappedBy = "skills")
     private List<Job> jobs = new ArrayList<>();
 
     public Skill() {
     }
 
-    // Getters and setters
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
+    public Skill(String description, List<Job> jobs) {
         this.description = description;
+        this.jobs = jobs;
     }
-    //
 
     public List<Job> getJobs() {
         return jobs;
@@ -40,4 +35,11 @@ public class Skill extends AbstractEntity {
         this.jobs = jobs;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

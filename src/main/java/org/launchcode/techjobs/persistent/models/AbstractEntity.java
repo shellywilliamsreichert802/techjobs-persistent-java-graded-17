@@ -1,3 +1,4 @@
+
 package org.launchcode.techjobs.persistent.models;
 
 
@@ -16,8 +17,7 @@ public abstract class AbstractEntity {
 
     //written by Shelly
     @Id
-//    @GeneratedValue
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int id; //*
 
     @NotBlank(message = "Name is required")
@@ -26,10 +26,6 @@ public abstract class AbstractEntity {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
